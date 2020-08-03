@@ -1,0 +1,18 @@
+{
+  "name": "caitsith",
+  "version": "1.0.0",
+  "description": "Wayfarer Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rdmontgomery",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "console-stamp": "^0.2.9",
+    "cron": "^1.8.2",
+    "webshot-node": "^0.18.2"
+  }
+}
