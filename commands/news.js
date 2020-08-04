@@ -15,23 +15,30 @@ module.exports = {
         axios.get(postListUrl).then((response) => {
             const $ = cheerio.load(response.data);
             const items = $('.postList_item');
-            for (let i = items.length - 1; i >= 0; i--) {
-                post = items[i]['attribs']['data-tab'];
-                if (!posts.includes(post)) {
-                    console.log(`News! Adding: ${post}`)
-                    var success = true;
-                    try {
-                        sendTitle(post);
-                    } catch (err) {
-                        success = false;
-                        console.log(`Nevermind. Not adding: ${post}`);
-                        console.log(err);
-                    }
-                    if (success) {
-                        fs.appendFile('assets/posts.yml', `${post}\n`, function (err) {
-                            if (err) return console.log(err);
-                        });
-                    }
+
+            // ignore old posts and dedupe new posts
+            var unq = [];
+            items.each(function (index, element) {
+                var tab = element['attribs']['data-tab'];
+                if (!posts.includes(tab) && !unq.includes(tab)) {
+                    unq.push(tab);
+                }
+            });
+
+            for (let post of unq) {
+                console.log(`News! Adding: ${post}`)
+                var success = true;
+                try {
+                    sendTitle(post);
+                } catch (err) {
+                    success = false;
+                    console.log(`Nevermind. Not adding: ${post}`);
+                    console.log(err);
+                }
+                if (success) {
+                    fs.appendFile('assets/posts.yml', `${post}\n`, function (err) {
+                        if (err) return console.log(err);
+                    });
                 }
             }
         })
