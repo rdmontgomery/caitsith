@@ -9,7 +9,7 @@
   "author": "rdmontgomery",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.3",
     "console-stamp": "^0.2.9",
     "cron": "^1.8.2",
